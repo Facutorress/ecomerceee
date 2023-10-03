@@ -10,6 +10,8 @@ import Dashboard from "./vistas/Dashboard";
 import ProductDetail from "./vistas/ProductDetail";
 import CrearProducto from "./vistas/CrearProducto";
 import MenuDesplegable from "./components/MenuDesplegable";
+import About from "./vistas/About";
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <ContextProvider>
     <BrowserRouter>
@@ -17,7 +19,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <MenuDesplegable />
       <Routes>
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<About/>} />
+        <Route path="/home" element={<Home />} />
         <Route path="/favoritos" element={<Favoritas />} />
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/crearproducto" element={<CrearProducto />} />
