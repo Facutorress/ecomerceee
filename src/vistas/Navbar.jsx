@@ -100,7 +100,7 @@ export default function Navbar() {
   
       <Link to="favoritos" className="flex items-center text-center">
         <MdFavorite color="red" size="30" />
-        <span className="cursor-pointer font-semibold">Favorites</span>
+        <span className="cursor-pointer font-semibold">Favs</span>
       </Link>
     </div>
   </motion.header>
