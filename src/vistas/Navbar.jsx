@@ -66,58 +66,45 @@ export default function Navbar() {
   };
   return (
     <motion.header
-      className="w-full bg-white fixed top-0 z-20 h-[15vh] flex items-center md:flex-col md:h-[12vh] "
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.7, delay: 0.25 }}
-    >
-   
-
-      <div className=" w-full md:h-full  items-center flex flex-col gap-1 md:flex-row md:px-12  md:justify-center 2xl:gap-24  ">
-        <input
-          type="text"
-          onKeyDown={handlerInputSearch}
-          placeholder="Find your product.."
-          className="rounded w-[350px] border-gray-200 bg-gray-100 p-2 pr-32 text-sm font-medium focus:ring-0 outline-none md:w-[500px] md:order-3 xl:w-[600px] xl:py-3"
-        />
-        <div className="w-full flex gap-12 items-center justify-around px-4 md:justify-around lg:w-[60%] xl:w-[50%] 2xl:w-[35%] 2xl:gap-24">
-      
-          <div
-            className="flex relative cursor-pointer "
-            onClick={handlerMenuControlado}
-          >
-            <HiShoppingBag
-              size="30"
-              className="cursor-pointer"
-              color="#909090"
-            />
-            <span className="absolute top-0 right-8 text-lg font-semibold z-20 ">
-              {acumulador}
-            </span>
-          </div>
-          <div className="flex items-center">
-            <Link to="/">
-              <span className="cursor-pointer font-semibold ">About</span>
-            </Link>
-          </div>
-          <Link to="/dashboard" className="flex items-center justify-center">
-            <MdAdminPanelSettings size={30} />
-            <p className="font-semibold hidden md:block">Admin</p>
-          </Link>
-          <Link to="/home">
-            <div className="flex items-center">
-              <HiHome size={30} className="cursor-pointer" />
-              <span className="font-semibold">Home</span>
-            </div>
-          </Link>
-          <div className="flex items-center">
-            <MdFavorite color="red" size={30} />
-            <Link to="favoritos">
-              <span className="cursor-pointer font-semibold ">Favorites</span>
-            </Link>
-          </div>
-        </div>
+    className="w-full bg-white fixed top-0 z-20 flex flex-col items-center justify-center p-4 md:flex-row md:justify-between md:p-6"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 0.7, delay: 0.25 }}
+  >
+    <input
+      type="text"
+      onKeyDown={handlerInputSearch}
+      placeholder="Find your product.."
+      className="rounded w-full border-gray-200 bg-gray-100 p-2 text-sm font-medium focus:ring-0 outline-none mb-4 md:w-[500px] xl:w-[600px] md:mb-0"
+    />
+  
+    <div className="w-full flex flex-wrap justify-between items-center gap-4">
+      <div className="flex relative cursor-pointer" onClick={handlerMenuControlado}>
+        <HiShoppingBag size="30" className="cursor-pointer" color="#909090" />
+        <span className="absolute top-0 left-8 text-lg font-semibold z-20">{acumulador}</span>
       </div>
-    </motion.header>
+  
+      <Link to="/" className="text-center">
+        <span className="cursor-pointer font-semibold">About</span>
+      </Link>
+  
+      <Link to="/dashboard" className="flex items-center justify-center text-center">
+        <MdAdminPanelSettings size="30" />
+        <p className="font-semibold md:inline">Admin</p>
+      </Link>
+  
+      <Link to="/home" className="flex items-center text-center">
+        <HiHome size="30" className="cursor-pointer" />
+        <span className="font-semibold">Home</span>
+      </Link>
+  
+      <Link to="favoritos" className="flex items-center text-center">
+        <MdFavorite color="red" size="30" />
+        <span className="cursor-pointer font-semibold">Favorites</span>
+      </Link>
+    </div>
+  </motion.header>
+
+  
   );
 }
