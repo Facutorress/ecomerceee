@@ -19,7 +19,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <MenuDesplegable />
       <Routes>
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/" element={<About/>} />
+        <Route path="/" element={<div className="mt-16"><About /></div>} />
         <Route path="/home" element={<Home />} />
         <Route path="/favoritos" element={<Favoritas />} />
         <Route path="/product/:id" element={<ProductDetail />} />
