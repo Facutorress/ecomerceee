@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { StoreContext } from "../context/ContextProvider";
 import { BsTelephone } from "react-icons/bs";
 import { HiShoppingBag, HiHome } from "react-icons/hi";
+import { HiOutlineInformationCircle } from "react-icons/hi";
 import { MdFavorite } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { toast } from "react-hot-toast";
@@ -84,9 +85,11 @@ export default function Navbar() {
         <span className="absolute top-0 left-8 text-lg font-semibold z-20">{acumulador}</span>
       </div>
   
-      <Link to="/" className="text-center">
-        <span className="cursor-pointer font-semibold">About</span>
-      </Link>
+      <Link to="/" className="flex items-center text-center">
+    <HiOutlineInformationCircle size="30" className="cursor-pointer" />
+    <span className="cursor-pointer font-semibold">About</span>
+</Link>
+
   
       <Link to="/dashboard" className="flex items-center justify-center text-center">
         <MdAdminPanelSettings size="30" />
