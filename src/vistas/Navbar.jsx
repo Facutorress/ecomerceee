@@ -1,0 +1,117 @@
+import React, { useEffect } from "react";
+import { useContext, useState } from "react";
+import { StoreContext } from "../context/ContextProvider";
+import { BsTelephone } from "react-icons/bs";
+import { HiShoppingBag, HiHome } from "react-icons/hi";
+import { MdFavorite } from "react-icons/md";
+import { Link } from "react-router-dom";
+import { toast } from "react-hot-toast";
+import { MdAdminPanelSettings } from "react-icons/md";
+import { motion } from "framer-motion";
+export default function Navbar() {
+  const {
+    allProduct,
+    setAllProductRender,
+    acumulador,
+    handlerMenu,
+    setCardFavoritas,
+    cardFavoritas,
+    cardFavoritasRender,
+    setProductosCreados,
+    productosCreados,
+    allProductCreados,
+  } = useContext(StoreContext);
+  const [inputSearch, setInputSearch] = useState("");
+  const handlerInputSearch = (e) => {
+    const ItemLocalStorage = JSON.parse(localStorage.getItem("formData"));
+    setInputSearch(e.target.value);
+    if (e.key === "Enter") {
+      if (inputSearch.length > 0) {
+        const filterCard = allProduct.filter((c) =>
+          c.title.toLowerCase().includes(inputSearch.toLowerCase())
+        );
+        const filterCardFavoritas = cardFavoritas.filter((c) =>
+          c.title.toLowerCase().includes(inputSearch.toLowerCase())
+        );
+
+        if (ItemLocalStorage) {
+          console.log("algo");
+          const filterCardCreadas =
+            ItemLocalStorage &&
+            ItemLocalStorage.filter((c) =>
+              c.title.toLowerCase().includes(inputSearch.toLowerCase())
+            );
+          setProductosCreados(filterCardCreadas);
+        }
+
+        setAllProductRender(filterCard);
+        setCardFavoritas(filterCardFavoritas);
+      } else {
+        setAllProductRender(allProduct);
+        setCardFavoritas(cardFavoritasRender);
+        setProductosCreados(ItemLocalStorage);
+      }
+    }
+  };
+
+  const uniqueCategories = [
+    ...new Set(allProduct.map((product) => product.category)),
+  ];
+
+  const handlerMenuControlado = () => {
+    if (acumulador !== 0) {
+      return handlerMenu();
+    }
+    toast.error("Tu carrito está vacio");
+  };
+  return (
+    <motion.header
+      className="w-full bg-white fixed top-0 z-20 h-[15vh] flex items-center md:flex-col md:h-[12vh] "
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.7, delay: 0.25 }}
+    >
+   
+
+      <div className=" w-full md:h-full  items-center flex flex-col gap-1 md:flex-row md:px-12  md:justify-center 2xl:gap-24  ">
+        <input
+          type="text"
+          onKeyDown={handlerInputSearch}
+          placeholder="Find your product.."
+          className="rounded w-[350px] border-gray-200 bg-gray-100 p-2 pr-32 text-sm font-medium focus:ring-0 outline-none md:w-[500px] md:order-3 xl:w-[600px] xl:py-3"
+        />
+        <div className="w-full flex gap-12 items-center justify-around px-4 md:justify-around lg:w-[60%] xl:w-[50%] 2xl:w-[35%] 2xl:gap-24">
+          <div
+            className="flex relative cursor-pointer"
+            onClick={handlerMenuControlado}
+          >
+            <HiShoppingBag
+              size="30"
+              className="cursor-pointer"
+              color="#909090"
+            />
+            <span className="absolute top-0 right-0 text-lg font-semibold z-20 ">
+              {acumulador}
+            </span>
+          </div>
+          <Link to="/dashboard" className="flex items-center justify-center">
+            <MdAdminPanelSettings size={30} />
+            <p className="font-semibold hidden md:block">Admin</p>
+          </Link>
+          <Link to="/">
+            <div className="flex items-center">
+              <HiHome size={30} className="cursor-pointer" />
+              <span className="font-semibold">Home</span>
+            </div>
+          </Link>
+          <div className="flex items-center">
+            <MdFavorite color="red" size={30} />
+            <Link to="favoritos">
+              <span className="cursor-pointer font-semibold ">Favorites</span>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </motion.header>
+  );
+}
